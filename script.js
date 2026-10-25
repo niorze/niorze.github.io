@@ -198,6 +198,9 @@ const brandGroups = [
     { img: 'assets/works/metaware-hud-gui.png', title: 'HUD + GUI' },
     { img: 'assets/works/metaware-hud.png',     title: 'HUD' },
   ]},
+  { name: 'Polar', tag: 'GUI', works: [
+    { img: 'assets/works/polar-gui.webp', title: 'Full GUI' },
+  ]},
   { name: 'Twix', tag: 'GUI', works: [
     { img: 'assets/works/twix-gui.png', title: 'GUI' },
   ]},
