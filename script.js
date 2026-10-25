@@ -15,8 +15,9 @@ const i18n = {
     'about.t2': 'который работает.',
     'about.p1': 'Делаю интерфейсы для игровых проектов: HUD, GUI, Main Menu, Alt Manager. Чистая композиция, продуманная иерархия, никаких лишних элементов.',
     'about.p2': 'Работаю по чёткому ТЗ, передаю в Figma, при необходимости переношу в код. 1–3 дня в среднем на задачу.',
-    'works.t1': 'Избранные',
+    'works.t1': 'Мои',
     'works.t2': 'работы.',
+    'works.all': 'Смотреть все работы',
     'works.cat.hud': 'HUD',
     'works.cat.gui': 'GUI',
     'works.cat.mm': 'Main Menu',
@@ -58,8 +59,9 @@ const i18n = {
     'about.t2': 'that works.',
     'about.p1': 'I design interfaces for gaming projects: HUD, GUI, Main Menu, Alt Manager. Clean composition, considered hierarchy, nothing extra.',
     'about.p2': 'I work from a clear brief, deliver via Figma, port to code when needed. 1–3 days on average per task.',
-    'works.t1': 'Selected',
+    'works.t1': 'My',
     'works.t2': 'works.',
+    'works.all': 'View all works',
     'works.cat.hud': 'HUD',
     'works.cat.gui': 'GUI',
     'works.cat.mm': 'Main Menu',
@@ -103,6 +105,7 @@ function applyLang(lang) {
   renderBundles(lang);
   renderRules(lang);
   renderWorks(lang);
+  renderBrandCarousels();
   try { localStorage.setItem('niorze.lang', lang); } catch(e) {}
 }
 
@@ -159,12 +162,48 @@ const rulesData = {
   ]
 };
 
-const workCats = [
-  { title: 'Niorze HUD', cat: 'works.cat.hud' },
-  { title: 'Niorze GUI', cat: 'works.cat.gui' },
-  { title: 'Niorze Menu', cat: 'works.cat.mm' },
-  { title: 'Niorze Alt', cat: 'works.cat.alt' },
-  { title: 'Niorze Logo', cat: 'works.cat.logo' },
+// Homepage: 5 featured works (one per brand)
+const works = [
+  { title: 'Niorze',    tag: 'UI/UX · Branding',  img: 'assets/works/niorze-brand-2.png',    span: 7 },
+  { title: 'Pouch',     tag: 'Branding',          img: 'assets/works/pouch-1.png',           span: 5 },
+  { title: 'Minced',    tag: 'HUD + GUI',         img: 'assets/works/minced-mc-hud-gui.png', span: 4 },
+  { title: 'Silex',     tag: 'Main Menu',         img: 'assets/works/silex-menu.png',        span: 4 },
+  { title: 'Metaware',  tag: 'HUD + GUI',         img: 'assets/works/metaware-hud-gui.png',  span: 4 },
+];
+
+// Works page: grouped by brand, horizontal carousel per brand
+const brandGroups = [
+  { name: 'Niorze', tag: 'UI/UX · Branding', works: [
+    { img: 'assets/works/niorze-brand-2.png', title: 'Welcome Back' },
+    { img: 'assets/works/niorze-brand-1.png', title: 'Information' },
+  ]},
+  { name: 'Pouch', tag: 'Branding · Banners', works: [
+    { img: 'assets/works/pouch-1.png', title: '1.21.11 Update' },
+    { img: 'assets/works/pouch-2.png', title: 'Banner · 02' },
+    { img: 'assets/works/pouch-3.png', title: 'Banner · 03' },
+    { img: 'assets/works/pouch-4.png', title: 'Banner · 04' },
+    { img: 'assets/works/pouch-5.png', title: 'Banner · 05' },
+  ]},
+  { name: 'Minced', tag: 'HUD · GUI', works: [
+    { img: 'assets/works/minced-mc-hud-gui.png', title: 'Minecraft HUD + GUI' },
+    { img: 'assets/works/minced-mc-hud.png',     title: 'Minecraft HUD' },
+    { img: 'assets/works/minced-cs2-hud.png',    title: 'CS2 HUD' },
+  ]},
+  { name: 'Silex', tag: 'UI · Full set', works: [
+    { img: 'assets/works/silex-menu.png',      title: 'Main Menu' },
+    { img: 'assets/works/silex-loading.png',   title: 'Loading Screen' },
+    { img: 'assets/works/silex-accounts.png',  title: 'Alt Manager' },
+  ]},
+  { name: 'Metaware', tag: 'HUD · GUI', works: [
+    { img: 'assets/works/metaware-hud-gui.png', title: 'HUD + GUI' },
+    { img: 'assets/works/metaware-hud.png',     title: 'HUD' },
+  ]},
+  { name: 'Twix', tag: 'GUI', works: [
+    { img: 'assets/works/twix-gui.png', title: 'GUI' },
+  ]},
+  { name: 'Pure', tag: 'Design', works: [
+    { img: 'assets/works/pure-1.png', title: 'Design' },
+  ]},
 ];
 
 // ---------- RENDER ----------
@@ -213,26 +252,94 @@ function renderRules(lang) {
 
 function renderWorks(lang) {
   const el = document.getElementById('worksGrid'); if (!el) return;
-  const d = i18n[lang];
-  const k = d['work.k'];
-  el.innerHTML = workCats.map((w, i) => `
-    <div class="work-card" data-idx="${i+1}">
-      <div class="work-top">
-        <span class="k">${String(i+1).padStart(2,'0')} / ${k}</span>
-        <span class="cat">${d[w.cat] || ''}</span>
-      </div>
-      <div class="work-bottom">
+  el.innerHTML = works.map((w, i) => `
+    <div class="work-card" data-idx="${i}" style="--span:${w.span}">
+      <img class="work-img" src="${w.img}" alt="${w.title} — ${w.tag}" loading="lazy" />
+      <div class="work-overlay">
+        <div class="work-meta-row">
+          <span class="work-tag">${w.tag}</span>
+          <span class="work-arrow"><i data-lucide="arrow-up-right"></i></span>
+        </div>
         <h3 class="work-title">${w.title}</h3>
-        <span class="work-arrow"><svg viewBox="0 0 24 24"><path d="M7 17L17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </div>
     </div>
   `).join('');
   const cnt = document.getElementById('worksCount');
-  if (cnt) cnt.textContent = String(workCats.length).padStart(2,'0');
+  if (cnt) cnt.textContent = String(works.length).padStart(2,'0');
   el.querySelectorAll('.work-card').forEach(card => {
-    card.addEventListener('click', () => openLightbox(card.querySelector('.work-title').textContent));
+    card.addEventListener('click', (e) => {
+      e.preventDefault();
+      const idx = parseInt(card.dataset.idx, 10);
+      openLightboxImage(works[idx]);
+    });
   });
-  bindCardCursor('.work-card');
+  renderIcons();
+}
+
+// Works.html: carousel grid grouped by brand
+function renderBrandCarousels() {
+  const el = document.getElementById('brandCarousels'); if (!el) return;
+  el.innerHTML = brandGroups.map((g, gi) => `
+    <section class="brand-row" data-brand="${gi}" data-idx="0">
+      <div class="brand-head">
+        <div>
+          <div class="brand-row-tag">${g.tag}</div>
+          <h2 class="brand-row-name">${g.name}</h2>
+        </div>
+        <div class="brand-nav">
+          <span class="brand-counter"><span class="cur">01</span> <span class="sep">/</span> <span class="total">${String(g.works.length).padStart(2,'0')}</span></span>
+          <button class="brand-arrow" data-dir="-1" ${g.works.length < 2 ? 'disabled' : ''} aria-label="Previous"><i data-lucide="arrow-left"></i></button>
+          <button class="brand-arrow" data-dir="1" ${g.works.length < 2 ? 'disabled' : ''} aria-label="Next"><i data-lucide="arrow-right"></i></button>
+        </div>
+      </div>
+      <div class="brand-stage">
+        ${g.works.map((w, wi) => `
+          <figure class="brand-slide${wi === 0 ? ' active' : ''}" data-slide="${wi}">
+            <img src="${w.img}" alt="${g.name} — ${w.title}" loading="lazy" />
+            <figcaption>${w.title}</figcaption>
+          </figure>
+        `).join('')}
+      </div>
+    </section>
+  `).join('');
+
+  // Bind arrows
+  el.querySelectorAll('.brand-row').forEach(row => {
+    const slides = row.querySelectorAll('.brand-slide');
+    const curEl  = row.querySelector('.brand-counter .cur');
+    const update = (newIdx) => {
+      const total = slides.length;
+      const idx = (newIdx + total) % total;
+      row.dataset.idx = idx;
+      slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+      if (curEl) curEl.textContent = String(idx + 1).padStart(2, '0');
+    };
+    row.querySelectorAll('.brand-arrow').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const dir = parseInt(btn.dataset.dir, 10);
+        update(parseInt(row.dataset.idx, 10) + dir);
+      });
+    });
+    // Click image → lightbox
+    slides.forEach((fig, i) => {
+      fig.addEventListener('click', () => {
+        const g = brandGroups[parseInt(row.dataset.brand, 10)];
+        openLightboxImage({
+          img: g.works[i].img,
+          title: `${g.name} — ${g.works[i].title}`,
+          tag: g.tag,
+        });
+      });
+    });
+    // Keyboard nav
+    row.tabIndex = 0;
+    row.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') update(parseInt(row.dataset.idx, 10) - 1);
+      if (e.key === 'ArrowRight') update(parseInt(row.dataset.idx, 10) + 1);
+    });
+  });
+
+  renderIcons();
 }
 
 // ---------- CARD CURSOR GLOW (subtle, no transform) ----------
@@ -250,7 +357,18 @@ function bindCardCursor(selector) {
 const lb = document.getElementById('lightbox');
 const lbContent = document.getElementById('lightboxContent');
 function openLightbox(text) {
-  lbContent.textContent = text;
+  lbContent.innerHTML = `<span class="lightbox-text">${text}</span>`;
+  lb.classList.add('open');
+  lb.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+function openLightboxImage(w) {
+  lbContent.innerHTML = `
+    <img class="lightbox-img" src="${w.img}" alt="${w.title} — ${w.tag}" />
+    <div class="lightbox-caption">
+      <span class="lightbox-tag">${w.tag}</span>
+      <span class="lightbox-title">${w.title}</span>
+    </div>`;
   lb.classList.add('open');
   lb.setAttribute('aria-hidden', 'false');
   document.body.style.overflow = 'hidden';

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru" data-lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Works — Niorze Design Studio</title>
+<meta name="description" content="Полное портфолио Niorze Studio — UI/UX для игровых проектов." />
+<link rel="icon" type="image/svg+xml" href="assets/bat.svg" />
+<link rel="preconnect" href="https://fonts.cdnfonts.com" />
+<link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css?v=29" />
+<script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
+</head>
+<body data-page="works">
+
+<div class="bg-layer" aria-hidden="true">
+  <div class="bg-image"></div>
+  <div class="bg-vignette"></div>
+  <div class="bg-grain"></div>
+</div>
+
+<header class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <img class="bat-mini" src="assets/bat.svg" alt="" aria-hidden="true" />
+      <span class="brand-name">Niorze</span>
+    </a>
+    <nav class="nav-links">
+      <a href="index.html#about">About</a>
+      <a href="works.html" class="active">Works</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="index.html#bundles">Bundles</a>
+      <a href="index.html#rules">Terms</a>
+      <a href="index.html#contacts">Contact</a>
+    </nav>
+    <button class="lang-toggle" id="langToggle" aria-label="Language">
+      <span class="lang-on">RU</span><span class="lang-sep">·</span><span class="lang-off">EN</span>
+    </button>
+  </div>
+</header>
+
+<section class="section">
+  <div class="section-inner">
+    <div class="section-head">
+      <span class="eyebrow"><i data-lucide="layout-grid" class="eyebrow-ic"></i>Works</span>
+      <span class="eyebrow eyebrow-dim">07 BRANDS</span>
+    </div>
+    <h2 class="h2">
+      <span data-i18n="worksAll.t1">Все</span>
+      <span class="h2-dim" data-i18n="worksAll.t2">работы.</span>
+    </h2>
+    <p class="prose prose-dim prose-sm" data-i18n="worksAll.sub">
+      Портфолио по брендам. Листай стрелками, кликни на картинку — откроется в полном размере.
+    </p>
+    <div id="brandCarousels"></div>
+
+    <div class="works-all-row">
+      <a class="btn btn-ghost" href="index.html">
+        <span class="btn-label" data-i18n="worksAll.back">← На главную</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-mega">NIORZE</div>
+  <div class="section-inner footer-grid">
+    <div>
+      <div class="brand">
+        <img class="bat-mini" src="assets/bat.svg" alt="" />
+        <span class="brand-name">Niorze</span>
+      </div>
+      <p class="footer-tag" data-i18n="footer.tag">UI&UX for gaming projects.</p>
+    </div>
+    <div class="footer-col">
+      <div class="footer-ttl">Links</div>
+      <a href="https://t.me/nrz_dsgn" target="_blank" rel="noopener">Telegram</a>
+      <a href="https://discord.gg/bgPWrNwfbj" target="_blank" rel="noopener">Discord</a>
+    </div>
+    <div class="footer-col">
+      <div class="footer-ttl">Legal</div>
+      <p class="footer-small" data-i18n="footer.rights">© 2026 Niorze · @nrzdsgn. Все права защищены.</p>
+    </div>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close">
+    <i data-lucide="x"></i>
+  </button>
+  <div class="lightbox-content" id="lightboxContent"></div>
+</div>
+
+<script src="script.js?v=29"></script>
+</body>
+</html>

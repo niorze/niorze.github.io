@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.cdnfonts.com" />
 <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet" />
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="styles.css?v=29" />
 <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js" defer></script>
 </head>
 <body>
@@ -117,10 +117,16 @@
       <span class="eyebrow eyebrow-dim" id="worksCount">—</span>
     </div>
     <h2 class="h2">
-      <span data-i18n="works.t1">Избранные</span>
+      <span data-i18n="works.t1">Мои</span>
       <span class="h2-dim" data-i18n="works.t2">работы.</span>
     </h2>
     <div class="works-grid" id="worksGrid"></div>
+    <div class="works-all-row">
+      <a class="btn btn-ghost" href="works.html">
+        <span class="btn-label" data-i18n="works.all">Смотреть все работы</span>
+        <span class="btn-circle btn-circle-ghost"><i data-lucide="arrow-right"></i></span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -276,6 +282,6 @@
   <div class="lightbox-content" id="lightboxContent"></div>
 </div>
 
-<script src="script.js"></script>
+<script src="script.js?v=29"></script>
 </body>
 </html>
