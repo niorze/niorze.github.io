@@ -41,7 +41,9 @@ const i18n = {
     'contacts.t1': 'Готов',
     'contacts.t2': 'обсудить',
     'contacts.t3': 'ваш проект.',
-    'contacts.channel': 'TG Channel',
+    'contacts.channel': 'TG канал',
+    'contacts.bot': 'Бот для заказов',
+    'contacts.direct': 'Личка',
     'footer.tag': 'UI/UX для игровых проектов.',
     'footer.rights': '© 2026 Niorze · @niorze. Все права защищены.',
     'work.k': 'Проект',
@@ -86,6 +88,8 @@ const i18n = {
     'contacts.t2': 'discuss',
     'contacts.t3': 'your project.',
     'contacts.channel': 'TG Channel',
+    'contacts.bot': 'Order Bot',
+    'contacts.direct': 'Direct',
     'footer.tag': 'UI/UX for gaming projects.',
     'footer.rights': '© 2026 Niorze · @niorze. All rights reserved.',
     'work.k': 'Project',
@@ -197,6 +201,10 @@ const brandGroups = [
   { name: 'Metaware', tag: 'HUD · GUI', works: [
     { img: 'assets/works/metaware-hud-gui.png', title: 'HUD + GUI' },
     { img: 'assets/works/metaware-hud.png',     title: 'HUD' },
+  ]},
+  { name: 'Explosion', tag: 'HUD · GUI', works: [
+    { img: 'assets/works/explosion-hud-gui.webp', title: 'HUD + GUI' },
+    { img: 'assets/works/explosion-hud.webp',     title: 'HUD' },
   ]},
   { name: 'Polar', tag: 'GUI', works: [
     { img: 'assets/works/polar-gui.webp', title: 'Full GUI' },
